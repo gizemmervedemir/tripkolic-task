@@ -1,26 +1,36 @@
 import { useState } from "react";
 
+type FiltersType = {
+    selectedTheme: string;
+    selectedActivities: string[];
+    maxPrice: number;
+    startTime: number;
+    groupSize: number;
+    selectedVehicle: string;
+};
+
+
 interface FiltersProps {
     isOpen: boolean;
     closeFilters: () => void;
-    applyFilters: (filters: any) => void;
+    applyFilters: (filters: FiltersType) => void;
 }
 
 const Filters: React.FC<FiltersProps> = ({ isOpen, closeFilters, applyFilters }) => {
-    if (!isOpen) return null;
 
-    const [selectedTheme, setSelectedTheme] = useState<string | null>(null);
+    const [selectedTheme, setSelectedTheme] = useState<string>("");
     const [selectedActivities, setSelectedActivities] = useState<string[]>([]);
     const [maxPrice, setMaxPrice] = useState<number>(10000);
     const [startTime, setStartTime] = useState<number>(12);
     const [groupSize, setGroupSize] = useState<number>(25);
     const [selectedVehicle, setSelectedVehicle] = useState<string | null>(null);
     const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
+    if (!isOpen) return null;
 
     const themes = ["Island Tour", "Land Tour", "Safari"];
     const activities = ["Swimming", "Running", "Elephant Care", "Snorkelling"];
     const vehicles = ["Yacht", "Speedboat", "Safari", "Catamaran", "Speedcatamaran"];
-    const features = ["Transfer", "Halal Food", "Vegetarian Food"];
+
 
     const toggleSelection = (item: string, setState: React.Dispatch<React.SetStateAction<string[]>>) => {
         setState((prev) =>
@@ -29,7 +39,7 @@ const Filters: React.FC<FiltersProps> = ({ isOpen, closeFilters, applyFilters })
     };
 
     const resetFilters = () => {
-        setSelectedTheme(null);
+        setSelectedTheme("");
         setSelectedActivities([]);
         setMaxPrice(10000);
         setStartTime(12);
@@ -39,9 +49,11 @@ const Filters: React.FC<FiltersProps> = ({ isOpen, closeFilters, applyFilters })
     };
 
     const searchTours = () => {
-        applyFilters({ selectedTheme, selectedActivities, maxPrice, startTime, groupSize, selectedVehicle, selectedFeatures });
+        applyFilters({ selectedTheme: selectedTheme || "", selectedActivities, maxPrice, startTime, groupSize, selectedVehicle: selectedVehicle || "", });
         closeFilters();
     };
+
+
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">

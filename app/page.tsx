@@ -12,7 +12,13 @@ export default function Home() {
     maxPrice: 12500,
   });
 
-  const applyFilters = (newFilters: { selectedTheme: string; maxPrice: number }) => {
+  type FiltersType = {
+    selectedTheme: string;
+    maxPrice: number;
+  };
+
+  const applyFilters = (newFilters: FiltersType) => {
+    console.log("Filtreler Güncellendi:", newFilters);
     setFilters(newFilters);
   };
 
