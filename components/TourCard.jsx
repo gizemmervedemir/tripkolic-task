@@ -1,17 +1,6 @@
 import Image from "next/image";
 
-interface Tour {
-    id: number;
-    name: string;
-    price: string;
-    discount: string;
-    image: string;
-    rating: number;
-    reviews: number;
-    location: string;
-}
-
-const TourCard: React.FC<{ tour: Tour }> = ({ tour }) => {
+const TourCard = ({ tour }) => {
     const tourPrice = parseFloat(tour.price.replace(/[^0-9.]/g, ""));
     const discountRate = parseFloat(tour.discount.replace(/[^0-9]/g, "")) / 100;
     const oldPrice = tourPrice / (1 - discountRate);

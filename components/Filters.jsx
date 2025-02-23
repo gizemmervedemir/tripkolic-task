@@ -1,38 +1,21 @@
 import { useState } from "react";
 
-type FiltersType = {
-    selectedTheme: string;
-    selectedActivities: string[];
-    maxPrice: number;
-    startTime: number;
-    groupSize: number;
-    selectedVehicle: string;
-};
+const Filters = ({ isOpen, closeFilters, applyFilters }) => {
+    const [selectedTheme, setSelectedTheme] = useState("");
+    const [selectedActivities, setSelectedActivities] = useState([]);
+    const [maxPrice, setMaxPrice] = useState(10000);
+    const [startTime, setStartTime] = useState(12);
+    const [groupSize, setGroupSize] = useState(25);
+    const [selectedVehicle, setSelectedVehicle] = useState(null);
+    const [selectedFeatures, setSelectedFeatures] = useState([]);
 
-
-interface FiltersProps {
-    isOpen: boolean;
-    closeFilters: () => void;
-    applyFilters: (filters: FiltersType) => void;
-}
-
-const Filters: React.FC<FiltersProps> = ({ isOpen, closeFilters, applyFilters }) => {
-
-    const [selectedTheme, setSelectedTheme] = useState<string>("");
-    const [selectedActivities, setSelectedActivities] = useState<string[]>([]);
-    const [maxPrice, setMaxPrice] = useState<number>(10000);
-    const [startTime, setStartTime] = useState<number>(12);
-    const [groupSize, setGroupSize] = useState<number>(25);
-    const [selectedVehicle, setSelectedVehicle] = useState<string | null>(null);
-    const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
     if (!isOpen) return null;
 
     const themes = ["Island Tour", "Land Tour", "Safari"];
     const activities = ["Swimming", "Running", "Elephant Care", "Snorkelling"];
     const vehicles = ["Yacht", "Speedboat", "Safari", "Catamaran", "Speedcatamaran"];
 
-
-    const toggleSelection = (item: string, setState: React.Dispatch<React.SetStateAction<string[]>>) => {
+    const toggleSelection = (item, setState) => {
         setState((prev) =>
             prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
         );
@@ -49,11 +32,16 @@ const Filters: React.FC<FiltersProps> = ({ isOpen, closeFilters, applyFilters })
     };
 
     const searchTours = () => {
-        applyFilters({ selectedTheme: selectedTheme || "", selectedActivities, maxPrice, startTime, groupSize, selectedVehicle: selectedVehicle || "", });
+        applyFilters({
+            selectedTheme: selectedTheme || "",
+            selectedActivities,
+            maxPrice,
+            startTime,
+            groupSize,
+            selectedVehicle: selectedVehicle || "",
+        });
         closeFilters();
     };
-
-
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">

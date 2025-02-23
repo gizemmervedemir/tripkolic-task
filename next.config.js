@@ -1,18 +1,22 @@
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   eslint: {
     ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
   },
   images: {
     unoptimized: true,
     domains: ["tripkolic-task.vercel.app"],
   },
   async redirects() {
-    return [];
+    return [
+      {
+        source: "/",
+        destination: "/",
+        permanent: false,
+      },
+    ];
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

@@ -6,18 +6,13 @@ import TourCard from "@/components/TourCard";
 import { tours } from "@/utils/data";
 
 export default function Home() {
-  const [filtersOpen, setFiltersOpen] = useState<boolean>(false);
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const [filters, setFilters] = useState({
     selectedTheme: "",
     maxPrice: 12500,
   });
 
-  type FiltersType = {
-    selectedTheme: string;
-    maxPrice: number;
-  };
-
-  const applyFilters = (newFilters: FiltersType) => {
+  const applyFilters = (newFilters) => {
     console.log("Filtreler Güncellendi:", newFilters);
     setFilters(newFilters);
   };

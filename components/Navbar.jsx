@@ -2,11 +2,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
-interface NavbarProps {
-    openFilters: () => void;
-}
-
-const Navbar: React.FC<NavbarProps> = ({ openFilters }) => {
+const Navbar = ({ openFilters }) => {
     const [isDarkMode, setIsDarkMode] = useState(false);
 
     useEffect(() => {
@@ -30,7 +26,7 @@ const Navbar: React.FC<NavbarProps> = ({ openFilters }) => {
     return (
         <nav className="navbar flex items-center justify-between px-4 py-2 bg-white dark:bg-gray-900 shadow-md w-full sm:px-6 md:px-8 lg:px-10">
             <button className="text-gray-700 dark:text-white font-semibold" onClick={openFilters}>
-                ☰ Traveller&apos;s Local Market
+                ☰ Traveller's Local Market
             </button>
             <Image src="/logo.png" alt="Logo" width={40} height={40} />
             <div className="flex items-center gap-4">
